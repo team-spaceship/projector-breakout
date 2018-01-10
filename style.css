@@ -1,0 +1,20 @@
+#game {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+#myCanvas {
+    position: relative;
+    top: 0;
+    z-index: 10;
+    transform: translateY(0);
+    margin-top: 20px;
+    background: transparent;
+    border: 2px solid rgb(82, 81, 81);
+    border-radius: 10px;
+}
