@@ -1,12 +1,12 @@
 <div id="game">
   <canvas id="myCanvas" style="display:none"></canvas>
-  <div id="game-init-screen">
+  <div id="game-init-screen" style="margin-top:50px;">
       <h1>Press 'Ok' to Start the game.</h1>
     </div>
-  <div id="game-over-screen" style="display:none;">
+  <div id="game-over-screen" style="display:none;margin-top:50px;">
     <h1>Game over! Press 'Ok' to restart the game.</h1>
   </div>
-  <div id="game-won-screen" style="display:none;">
+  <div id="game-won-screen" style="display:none;margin-top:50px;">
     <h1>Good job, you won! Press 'Ok' to restart the game.</h1>
   </div>
 </div>
@@ -117,7 +117,7 @@
     paddleWidth = (canvas.width / 6) + 15;
     paddleX = (canvas.width - paddleWidth) / 2;
     canvas.width = window.innerWidth - 20;
-    canvas.height = window.innerHeight - 100;
+    canvas.height = window.innerHeight - 200;
     
     // Brick settings.
     brickPadding = 5;
@@ -131,7 +131,6 @@
     console.log('BrickWidth: ',brickWidth);
     console.log('Total Width Canvas: ', canvas.width);
     console.log('Total width Bricks: ', (brickWidth + 5 ) * brickRowCount);
-
 
     // game screens
     gameWonScreen = document.getElementById('game-won-screen');
@@ -172,28 +171,28 @@
   }
     
   function collisionDetection() {
-      for (let c = 0; c < brickColumnCount; c += 1) {
-        for (let r = 0; r < brickRowCount; r += 1) {
-          const b = bricks[c][r];
-          if (b.status === 1) {
-            if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-              dy = -dy;
-              b.status = 0;
-              score += 1;
-              if (score === brickRowCount * brickColumnCount) {
-                gameState = 2;
-                checkGameState();
-              }
+    for (let c = 0; c < brickColumnCount; c += 1) {
+      for (let r = 0; r < brickRowCount; r += 1) {
+        const b = bricks[c][r];
+        if (b.status === 1) {
+          if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+            dy = -dy;
+            b.status = 0;
+            score += 1;
+            if (score === brickRowCount * brickColumnCount) {
+              gameState = 2;
+              checkGameState();
             }
           }
         }
       }
     }
+  }
     
   function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#FFFFFF";
     ctx.fill();
     ctx.closePath();
   }
@@ -201,10 +200,11 @@
   function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#FFFFFF";
     ctx.fill();
     ctx.closePath();
   }
+
   function drawBricks() {
     for (let c = 0; c < brickColumnCount; c += 1) {
       for (let r = 0; r < brickRowCount; r += 1) {
@@ -215,21 +215,22 @@
           bricks[c][r].y = brickY;
           ctx.beginPath();
           ctx.rect(brickX, brickY, brickWidth, brickHeight);
-          ctx.fillStyle = "#0095DD";
+          ctx.fillStyle = "#FFFFFF";
           ctx.fill();
           ctx.closePath();
         }
       }
     }
   }
+
   function drawScore() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "#FFFFFF";
     ctx.fillText("Score: " + score, 8, 20);
   }
   function drawLives() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "#FFFFFF";
     ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
   }
     
